@@ -1,9 +1,10 @@
-import type { NextPage } from 'next'
+import type { NextPage, GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import {getMovies} from '../api/getMovies'
 import styles from '../styles/Home.module.css'
 
-const Home: NextPage = () => {
+const Home: NextPage = ({movies}:InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -68,5 +69,14 @@ const Home: NextPage = () => {
     </div>
   )
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const movies = await getMovies()
+  return {
+    props: {
+      movies
+    }
+  }
+};
 
 export default Home
