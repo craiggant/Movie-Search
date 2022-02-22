@@ -4,7 +4,7 @@ import {Movie} from '../types'
 const config: AxiosRequestConfig = {
 	method: 'get',
 	url: process.env.MOVIE_API_URL,
-  headers: { Authorization: process.env.API_AUTH_HEADER },
+  headers: { Authorization: `${process.env.API_AUTH_HEADER}` },
 	validateStatus: function (status) {
 		return status < 500; // Resolve only if the status code is less than 500
 	}
