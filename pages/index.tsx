@@ -3,7 +3,7 @@ import React, {useState} from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Card from '../components/Card'
-import Drawer from '../components/Drawer'
+import Modal from '../components/Modal'
 import MoreInfo from '../components/MoreInfo'
 import {getMovies, getMovieById} from '../api/getMovies'
 import { Movie, FullMovieInfo } from '../types';
@@ -69,9 +69,9 @@ const Home: NextPage<Props> = ({movies}) => {
 							/>
 						))}
 				</div>
-				<Drawer isActive={isActive} setIsActive={setIsActive}>
+				<Modal isActive={isActive} setIsActive={setIsActive}>
 					<MoreInfo currentMovie={currentMovie} />
-				</Drawer>
+				</Modal>
 			</main>
 
 			<footer className={styles.footer}>
