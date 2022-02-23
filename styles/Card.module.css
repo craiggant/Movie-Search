@@ -1,0 +1,29 @@
+.card {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	width: 13rem;
+	height: 25rem;
+	margin: 1rem 1rem 0 1rem;
+}
+
+.card h3 {
+	margin: 0 0 1rem 0;
+}
+
+.cardBody {
+	position: relative;
+	height: 18.75rem;
+	width: 12.5rem;
+
+	border-radius: 0.5rem;
+	box-shadow: rgba(0, 0, 0, 0.06) 0px 0.12rem 0.25rem;
+	transition: all 0.3s ease-in-out;
+}
+
+.cardBody:hover,
+.cardBody:focus,
+.cardBody:active {
+	box-shadow: rgba(0, 0, 0, 0.22) 0 1.5rem 2.8rem;
+	transform: translate3d(0, -0.0625rem, 0);
+}
