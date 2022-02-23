@@ -5,12 +5,13 @@ import styles from "../styles/Card.module.css";
 
 type Props = {
   movie: Movie,
+  handleClick: React.MouseEventHandler<HTMLDivElement>
 }
 
-const Card = ({movie}: Props) => {
+const Card = ({movie, handleClick}:Props) => {
   const {id, title, genres} = movie;
   return (
-    <div className={styles.card}>
+    <div className={styles.card} data-id={id} onClick={handleClick}>
       <div className={styles.cardBody}>
           <ImageWithDefault
             src={`/moviePosterImages/${id}.jpeg`}
