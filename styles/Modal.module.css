@@ -7,21 +7,6 @@
 	position: fixed;
 	margin-top: 2%;
 	border-radius: 1rem;
-	overflow: hidden;
-}
-
-.modal {
-	width: 90vw;
-	height: 90vh;
-	max-height: 1200px;
-	max-width: 1200px;
-	position: relative;
-	border-radius: 4px;
-	margin: 0 auto;
-	padding: 1rem;
-	background: #fff;
-	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-		0 4px 6px -2px rgba(0, 0, 0, 0.05);
 	overflow: scroll;
 }
 

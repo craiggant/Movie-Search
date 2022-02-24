@@ -30,7 +30,7 @@ const Modal: React.FC<Props> = ({isActive, setIsActive, children}) => {
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ bounce: .06,  type: 'spring', duration: .3}}
 						>
-							<div className={styles.modal}>
+							<div>
 								{children}
 							</div>
 						</motion.div>
