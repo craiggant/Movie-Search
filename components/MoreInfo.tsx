@@ -1,22 +1,17 @@
-import React from 'react'
-import ImageWithDefault from './ImageWithDefault';
+import React, {useMemo} from 'react'
 import { FullMovieInfo } from '../types';
 import styles from '../styles/MoreInfo.module.css'
-import Card from './Card';
 
 type Props = {
   currentMovie: FullMovieInfo
 }
 
-// const makeGenreString = (genreArray: string[]):string => {
-//   const genreString =
-// }
-
 const MoreInfo = ({currentMovie}:Props) => {
   const {description, duration, genres, id, releaseDate, releaseYear, title, topCast} = currentMovie;
 
-  const genreString = genres.join(', ')
-  //useMemo for time/year manipulations
+  const genreString = useMemo(()=> genres.join(', '),[genres])
+  const runTime = useMemo(() => duration/60, [duration]);
+
   return (
 		<div
 			className={styles.movieCard}
@@ -36,7 +31,7 @@ const MoreInfo = ({currentMovie}:Props) => {
 						</div>
 					</div>
 					<p className={styles.movieRunTime}>
-						{duration / 60} minutes
+						{runTime} minutes
 					</p>
 					<p className={styles.movieDescription}>{description}</p>
 					<div className={styles.movieCredits}>
