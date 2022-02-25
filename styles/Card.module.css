@@ -9,6 +9,8 @@
 
 .card h3 {
 	margin: 0 0 1rem 0;
+	color: #fff;
+	opacity: 0.9;
 }
 
 .cardBody {
@@ -16,13 +18,12 @@
 	height: 18.75rem;
 	width: 12.5rem;
 	border-radius: 0.5rem;
-	box-shadow: rgba(0, 0, 0, 0.06) 0px 0.12rem 0.25rem;
 	transition: all 0.3s ease-in-out;
+	cursor: pointer;
 }
 
 .cardBody:hover,
 .cardBody:focus,
 .cardBody:active {
-	box-shadow: rgba(0, 0, 0, 0.22) 0 1.5rem 2.8rem;
-	transform: translate3d(0, -0.0625rem, 0);
+	transform: scale(1.08);
 }
