@@ -4,6 +4,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Card from '../components/Card'
 import Modal from '../components/Modal'
+import Input from "../components/Input"
 import MoreInfo from '../components/MoreInfo'
 import {getMovies, getMovieById} from '../api/getMovies'
 import { Movie, FullMovieInfo } from '../types';
@@ -39,33 +40,41 @@ const Home: NextPage<Props> = ({movies}) => {
   };
 
   return (
-		<div className={styles.container}>
-			<Head>
-				<title>Movie Search</title>
-				<meta
-					name="description"
-					content="Movie Search App"
-				/>
-			</Head>
-
-			<main className={styles.main}>
-        <h1 className={styles.title}>Movie App</h1>
-        <p className={styles.description}>Search for Movies!</p>
-				<div className={styles.grid}>
-					{movies &&
-						movies.map((movie) => (
-							<Card
-								key={movie.id}
-								movie={movie}
-								handleClick={handleClick}
-							/>
-						))}
-				</div>
-				<Modal isActive={isActive} setIsActive={setIsActive}>
-					<MoreInfo currentMovie={currentMovie} />
-				</Modal>
-			</main>
-		</div>
+		<>
+			<div className={styles.nav}>
+					<Input
+						type="text"
+						label="Search By Title"
+						name="titleSearch"
+					/>
+					<Input
+						type="text"
+						label="Search By Genre"
+						name="genreSearch"
+					/>
+			</div>
+			<div className={styles.container}>
+				<Head>
+					<title>Movie Search</title>
+					<meta name="description" content="Movie Search App" />
+				</Head>
+				<main className={styles.main}>
+					<div className={styles.grid}>
+						{movies &&
+							movies.map((movie) => (
+								<Card
+									key={movie.id}
+									movie={movie}
+									handleClick={handleClick}
+								/>
+							))}
+					</div>
+					<Modal isActive={isActive} setIsActive={setIsActive}>
+						<MoreInfo currentMovie={currentMovie} />
+					</Modal>
+				</main>
+			</div>
+		</>
   );
 }
 
