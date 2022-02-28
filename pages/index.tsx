@@ -34,6 +34,7 @@ const Home: NextPage<Props> = ({movies}) => {
 
   const {filtered, filterOnChange} = useMovieFilter(movies);
   const {searchResults} = filtered;
+
   const handleClick = async (
 		e: React.MouseEvent<HTMLDivElement>
   ): Promise<void> => {
@@ -86,6 +87,8 @@ const Home: NextPage<Props> = ({movies}) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 	const movies = await getMovies()
+  // alphabetize movies by title
+  movies?.sort((a, b) => a.title.localeCompare(b.title))
   return {
     props: {
       movies
