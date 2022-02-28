@@ -12,11 +12,20 @@ const MoreInfo = ({currentMovie}:Props) => {
   const genreString = useMemo(()=> genres.join(', '),[genres])
   const runTime = useMemo(() => duration/60, [duration]);
 
+  if (!id) {
+    return <div
+			className={styles.movieCard}
+			style={{
+				backgroundImage: `url(/movieHeroImages/${id}.jpeg), url(/movieHeroImages/defaultImage.jpeg)`
+			}}
+		></div>
+  }
+
   return (
 		<div
 			className={styles.movieCard}
 			style={{
-				backgroundImage: `url(/movieHeroImages/${id}.jpeg), url(/movieHeroImages/defaultImage.jpeg)`
+				backgroundImage: `url(movieHeroImages/${id}.jpeg), url(movieHeroImages/defaultImage.jpeg)`
 			}}
 		>
 			<div className={styles.cardOverlay}></div>
