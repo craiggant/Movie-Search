@@ -34,7 +34,6 @@ const Home: NextPage<Props> = ({movies}) => {
 
   const {filtered, filterOnChange} = useMovieFilter(movies);
   const {searchResults} = filtered;
-
   const handleClick = async (
 		e: React.MouseEvent<HTMLDivElement>
   ): Promise<void> => {

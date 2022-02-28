@@ -20,12 +20,19 @@ const filterByTitle = (movieArray:Movie[], input:string):Movie[] => {
  */
 
 const filterByGenre = (movieArray: Movie[], input: string):Movie[] => {
-	return movieArray.filter((movie) => {
-		if (movie.genres.length)
-			return movie.genres.find((genre) =>
-				genre.toLowerCase().includes(input.toLowerCase())
-			);
-	});
+  // split input by comma or space, so that a user could look up multiple genres at once
+  const arrayFromInputString = input.split(/[ ,]+/);
+
+  return movieArray.filter(movie => {
+    if (movie.genres.length) {
+      const resultArray = arrayFromInputString.map(input => {
+        return movie.genres.find(genre => genre.toLowerCase().includes(input.toLowerCase()))
+      })
+      if (!resultArray.includes(undefined)) {
+        return movie
+      }
+    }
+  })
 };
 
 /**
