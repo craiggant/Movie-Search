@@ -12,6 +12,7 @@ const Input: React.FC<Props> = ({ name, label, ...rest }) => {
 			<input
 				className={styles.input}
         id={name}
+        name={name}
         placeholder={label}
         {...rest}
 			/>

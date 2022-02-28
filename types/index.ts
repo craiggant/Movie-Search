@@ -20,3 +20,9 @@ export type FullMovieInfo = {
   title: string,
   topCast: Actor[]
 }
+
+export type MovieFilter = {
+  titleSearch: '',
+  genreSearch: '',
+  searchResults: Movie[] | null,
+}

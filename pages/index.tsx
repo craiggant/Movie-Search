@@ -7,8 +7,9 @@ import Modal from '../components/Modal'
 import Input from "../components/Input"
 import MoreInfo from '../components/MoreInfo'
 import {getMovies, getMovieById} from '../api/getMovies'
-import { Movie, FullMovieInfo } from '../types';
+import { Movie, FullMovieInfo} from '../types';
 import styles from '../styles/Home.module.css'
+import useMovieFilter from '../hooks/useMovieFilter'
 
 type Props = {
   movies: Movie[]|null
@@ -26,9 +27,13 @@ const initialFullMovieState: FullMovieInfo = {
   topCast: []
 }
 
+
 const Home: NextPage<Props> = ({movies}) => {
   const [isActive, setIsActive] = useState<boolean>(false);
   const [currentMovie, setCurrentMovie] = useState<FullMovieInfo>(initialFullMovieState);
+
+  const {filtered, filterOnChange} = useMovieFilter(movies);
+  const {searchResults} = filtered;
 
   const handleClick = async (
 		e: React.MouseEvent<HTMLDivElement>
@@ -42,16 +47,18 @@ const Home: NextPage<Props> = ({movies}) => {
   return (
 		<>
 			<div className={styles.nav}>
-					<Input
-						type="text"
-						label="Search By Title"
-						name="titleSearch"
-					/>
-					<Input
-						type="text"
-						label="Search By Genre"
-						name="genreSearch"
-					/>
+				<Input
+					type="text"
+					label="Search By Title"
+					name="titleSearch"
+					onChange={filterOnChange}
+				/>
+				<Input
+					type="text"
+					label="Search By Genre"
+					name="genreSearch"
+					onChange={filterOnChange}
+				/>
 			</div>
 			<div className={styles.container}>
 				<Head>
@@ -60,14 +67,14 @@ const Home: NextPage<Props> = ({movies}) => {
 				</Head>
 				<main className={styles.main}>
 					<div className={styles.grid}>
-						{movies &&
-							movies.map((movie) => (
+            {searchResults?.length ? (
+							searchResults.map((movie) => (
 								<Card
 									key={movie.id}
 									movie={movie}
 									handleClick={handleClick}
 								/>
-							))}
+							))) : (<p>No results found</p>)}
 					</div>
 					<Modal isActive={isActive} setIsActive={setIsActive}>
 						<MoreInfo currentMovie={currentMovie} />
