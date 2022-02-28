@@ -1,6 +1,20 @@
 .container {
 	padding: 0 2rem;
-	background: linear-gradient(-120deg, #434343, #000000);
+	background: linear-gradient(-120deg, #434343, #1b1b1b);
+}
+
+.nav {
+	position: sticky;
+	top: 0;
+	left: 0;
+	height: 6rem;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	flex-wrap: wrap;
+	width: 100vw;
+	background: #000000;
+	z-index: 2;
 }
 
 .main {
@@ -9,7 +23,6 @@
 	flex: 1;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
 }
 
@@ -40,9 +53,23 @@
 	max-width: 1500px;
 }
 
+@media (max-width: 880px) {
+	.nav {
+		padding: 1rem;
+		justify-content: center;
+		height: 11rem;
+	}
+}
+
 @media (max-width: 600px) {
 	.grid {
 		width: 100%;
 		flex-direction: column;
+	}
+
+	.nav {
+		padding: 1rem;
+		justify-content: center;
+		height: 11rem;
 	}
 }
