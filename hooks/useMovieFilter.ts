@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { filterMovies } from '../helper/helperFunctions';
 import { Movie, MovieFilter } from '../types';
 
