@@ -10,6 +10,7 @@ import Nav from '../components/Nav';
 import { getMovies, getMovieById } from '../api/getMovies';
 import { Movie, FullMovieInfo } from '../types';
 import styles from '../styles/Home.module.css';
+import useCurrentMovie from '../hooks/useCurrentMovie';
 import useMovieFilter from '../hooks/useMovieFilter';
 import MoreInfoSkeleton from '../components/MoreInfoSkeleton';
 
@@ -17,35 +18,12 @@ type Props = {
 	movies: Movie[] | null;
 };
 
-const initialFullMovieState: FullMovieInfo = {
-	description: '',
-	duration: 0,
-	genres: [],
-	id: '',
-	moods: [],
-	releaseDate: '',
-	releaseYear: 0,
-	title: '',
-	topCast: []
-};
-
 const Home: NextPage<Props> = ({ movies }) => {
-	const [isActive, setIsActive] = useState<boolean>(false);
-	const [currentMovie, setCurrentMovie] = useState<FullMovieInfo>(
-		initialFullMovieState
-	);
-
 	const { filtered, filterOnChange } = useMovieFilter(movies);
 	const { searchResults } = filtered;
 
-	const handleClick = async (
-		e: React.MouseEvent<HTMLDivElement>
-	): Promise<void> => {
-		const { id } = e.currentTarget.dataset;
-		const movie = await getMovieById(id);
-		movie ? setCurrentMovie(movie) : setCurrentMovie(initialFullMovieState);
-		setIsActive(true);
-	};
+	const { isActive, setIsActive, currentMovie, handleMovieClick } =
+		useCurrentMovie();
 
 	return (
 		<>
@@ -65,7 +43,7 @@ const Home: NextPage<Props> = ({ movies }) => {
 								<Card
 									key={movie.id}
 									movie={movie}
-									handleClick={handleClick}
+									handleClick={handleMovieClick}
 								/>
 							))
 						) : (
