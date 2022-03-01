@@ -1,14 +1,12 @@
 import type { NextPage, GetServerSideProps } from 'next';
-import React, { useState } from 'react';
+import React from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
 import Card from '../components/Card';
 import Modal from '../components/Modal';
-import Input from '../components/Input';
 import MoreInfo from '../components/MoreInfo';
 import Nav from '../components/Nav';
-import { getMovies, getMovieById } from '../api/getMovies';
-import { Movie, FullMovieInfo } from '../types';
+import { getMovies } from '../api/getMovies';
+import { Movie } from '../types';
 import styles from '../styles/Home.module.css';
 import useCurrentMovie from '../hooks/useCurrentMovie';
 import useMovieFilter from '../hooks/useMovieFilter';
