@@ -79,7 +79,7 @@ const Home: NextPage<Props> = ({ movies }) => {
 							))
 						) : (
 							<p className={styles.noResultsMessage}>
-								We're sorry. There are no matches for your
+								We&apos;re sorry. There are no matches for your
 								search.
 							</p>
 						)}
