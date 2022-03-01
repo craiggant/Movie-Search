@@ -1,18 +1,27 @@
-import React, {useMemo} from 'react'
+import React, { useMemo } from 'react';
 import { FullMovieInfo } from '../types';
-import styles from '../styles/MoreInfo.module.css'
+import styles from '../styles/MoreInfo.module.css';
 
 type Props = {
-  currentMovie: FullMovieInfo
-}
+	currentMovie: FullMovieInfo;
+};
 
-const MoreInfo = ({currentMovie}:Props) => {
-  const {description, duration, genres, id, releaseDate, releaseYear, title, topCast} = currentMovie;
+const MoreInfo = ({ currentMovie }: Props) => {
+	const {
+		description,
+		duration,
+		genres,
+		id,
+		releaseDate,
+		releaseYear,
+		title,
+		topCast
+	} = currentMovie;
 
-  const genreString = useMemo(()=> genres.join(', '),[genres])
-  const runTime = useMemo(() => duration/60, [duration]);
+	const genreString = useMemo(() => genres.join(', '), [genres]);
+	const runTime = useMemo(() => duration / 60, [duration]);
 
-  return (
+	return (
 		<div
 			className={styles.movieCard}
 			style={{
@@ -30,9 +39,7 @@ const MoreInfo = ({currentMovie}:Props) => {
 							<p>{genreString}</p>
 						</div>
 					</div>
-					<p className={styles.movieRunTime}>
-						{runTime} minutes
-					</p>
+					<p className={styles.movieRunTime}>{runTime} minutes</p>
 					<p className={styles.movieDescription}>{description}</p>
 					<div className={styles.movieCredits}>
 						<p>
@@ -54,8 +61,7 @@ const MoreInfo = ({currentMovie}:Props) => {
 				</div>
 			</div>
 		</div>
-  );
-}
+	);
+};
 
-
-export default MoreInfo
+export default MoreInfo;
