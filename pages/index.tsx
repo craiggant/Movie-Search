@@ -78,7 +78,10 @@ const Home: NextPage<Props> = ({ movies }) => {
 								/>
 							))
 						) : (
-							<p>No results found</p>
+							<p className={styles.noResultsMessage}>
+								We're sorry. There are no matches for your
+								search.
+							</p>
 						)}
 					</div>
 					<Modal isActive={isActive} setIsActive={setIsActive}>

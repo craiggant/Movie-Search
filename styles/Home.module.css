@@ -53,6 +53,13 @@
 	max-width: 1500px;
 }
 
+.noResultsMessage {
+	font-size: 2rem;
+	font-weight: 300;
+	color: #fff;
+	opacity: 0.9;
+}
+
 @media (max-width: 880px) {
 	.nav {
 		padding: 1rem;
