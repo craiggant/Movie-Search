@@ -6,6 +6,7 @@ import Card from '../components/Card';
 import Modal from '../components/Modal';
 import Input from '../components/Input';
 import MoreInfo from '../components/MoreInfo';
+import Nav from '../components/Nav';
 import { getMovies, getMovieById } from '../api/getMovies';
 import { Movie, FullMovieInfo } from '../types';
 import styles from '../styles/Home.module.css';
@@ -48,20 +49,7 @@ const Home: NextPage<Props> = ({ movies }) => {
 
 	return (
 		<>
-			<div className={styles.nav}>
-				<Input
-					type="text"
-					label="Search By Title"
-					name="titleSearch"
-					onChange={filterOnChange}
-				/>
-				<Input
-					type="text"
-					label="Search By Genre"
-					name="genreSearch"
-					onChange={filterOnChange}
-				/>
-			</div>
+			<Nav filterOnChange={filterOnChange}></Nav>
 			<div className={styles.container}>
 				<Head>
 					<title>Movie Search</title>
