@@ -1,4 +1,4 @@
-import type { NextPage, GetServerSideProps } from 'next';
+import type { NextPage, GetStaticProps } from 'next';
 import React from 'react';
 import Head from 'next/head';
 import Card from '../components/Card';
@@ -64,14 +64,15 @@ const Home: NextPage<Props> = ({ movies }) => {
 	);
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticProps: GetStaticProps = async (context) => {
 	const movies = await getMovies();
 	// alphabetize movies by title
 	movies?.sort((a, b) => a.title.localeCompare(b.title));
 	return {
 		props: {
 			movies
-		}
+		},
+		revalidate: 86400
 	};
 };
 

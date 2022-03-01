@@ -60,23 +60,9 @@
 	opacity: 0.9;
 }
 
-@media (max-width: 880px) {
-	.nav {
-		padding: 1rem;
-		justify-content: center;
-		height: 11rem;
-	}
-}
-
 @media (max-width: 600px) {
 	.grid {
 		width: 100%;
 		flex-direction: column;
-	}
-
-	.nav {
-		padding: 1rem;
-		justify-content: center;
-		height: 11rem;
 	}
 }
