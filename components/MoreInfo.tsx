@@ -7,16 +7,8 @@ type Props = {
 };
 
 const MoreInfo = ({ currentMovie }: Props) => {
-	const {
-		description,
-		duration,
-		genres,
-		id,
-		releaseDate,
-		releaseYear,
-		title,
-		topCast
-	} = currentMovie;
+	const { description, duration, genres, id, releaseYear, title, topCast } =
+		currentMovie;
 
 	const genreString = useMemo(() => genres.join(', '), [genres]);
 	const runTime = useMemo(() => duration / 60, [duration]);
