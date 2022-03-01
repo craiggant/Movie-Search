@@ -1,14 +1,14 @@
 import type { NextPage, GetServerSideProps } from 'next';
-import React, { useState } from 'react';
+import React from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
 import Card from '../components/Card';
 import Modal from '../components/Modal';
-import Input from '../components/Input';
 import MoreInfo from '../components/MoreInfo';
-import { getMovies, getMovieById } from '../api/getMovies';
-import { Movie, FullMovieInfo } from '../types';
+import Nav from '../components/Nav';
+import { getMovies } from '../api/getMovies';
+import { Movie } from '../types';
 import styles from '../styles/Home.module.css';
+import useCurrentMovie from '../hooks/useCurrentMovie';
 import useMovieFilter from '../hooks/useMovieFilter';
 import MoreInfoSkeleton from '../components/MoreInfoSkeleton';
 
@@ -16,57 +16,24 @@ type Props = {
 	movies: Movie[] | null;
 };
 
-const initialFullMovieState: FullMovieInfo = {
-	description: '',
-	duration: 0,
-	genres: [],
-	id: '',
-	moods: [],
-	releaseDate: '',
-	releaseYear: 0,
-	title: '',
-	topCast: []
-};
-
 const Home: NextPage<Props> = ({ movies }) => {
-	const [isActive, setIsActive] = useState<boolean>(false);
-	const [currentMovie, setCurrentMovie] = useState<FullMovieInfo>(
-		initialFullMovieState
-	);
-
 	const { filtered, filterOnChange } = useMovieFilter(movies);
 	const { searchResults } = filtered;
 
-	const handleClick = async (
-		e: React.MouseEvent<HTMLDivElement>
-	): Promise<void> => {
-		const { id } = e.currentTarget.dataset;
-		const movie = await getMovieById(id);
-		movie ? setCurrentMovie(movie) : setCurrentMovie(initialFullMovieState);
-		setIsActive(true);
-	};
+	const { isActive, setIsActive, currentMovie, handleMovieClick } =
+		useCurrentMovie();
 
 	return (
 		<>
-			<div className={styles.nav}>
-				<Input
-					type="text"
-					label="Search By Title"
-					name="titleSearch"
-					onChange={filterOnChange}
+			<Head>
+				<title>Movie Search</title>
+				<meta
+					name="description"
+					content="Find favorite movies by title or genre"
 				/>
-				<Input
-					type="text"
-					label="Search By Genre"
-					name="genreSearch"
-					onChange={filterOnChange}
-				/>
-			</div>
+			</Head>
+			<Nav filterOnChange={filterOnChange}></Nav>
 			<div className={styles.container}>
-				<Head>
-					<title>Movie Search</title>
-					<meta name="description" content="Movie Search App" />
-				</Head>
 				<main className={styles.main}>
 					<div className={styles.grid}>
 						{searchResults?.length ? (
@@ -74,7 +41,7 @@ const Home: NextPage<Props> = ({ movies }) => {
 								<Card
 									key={movie.id}
 									movie={movie}
-									handleClick={handleClick}
+									handleClick={handleMovieClick}
 								/>
 							))
 						) : (

@@ -1,0 +1,13 @@
+.nav {
+	position: sticky;
+	top: 0;
+	left: 0;
+	height: 6rem;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	flex-wrap: wrap;
+	width: 100vw;
+	background: #000000;
+	z-index: 2;
+}
