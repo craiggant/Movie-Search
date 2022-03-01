@@ -49,12 +49,15 @@ const Home: NextPage<Props> = ({ movies }) => {
 
 	return (
 		<>
+			<Head>
+				<title>Movie Search</title>
+				<meta
+					name="description"
+					content="Find favorite movies by title or genre"
+				/>
+			</Head>
 			<Nav filterOnChange={filterOnChange}></Nav>
 			<div className={styles.container}>
-				<Head>
-					<title>Movie Search</title>
-					<meta name="description" content="Movie Search App" />
-				</Head>
 				<main className={styles.main}>
 					<div className={styles.grid}>
 						{searchResults?.length ? (
