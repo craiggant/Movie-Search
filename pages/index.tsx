@@ -14,9 +14,10 @@ import MoreInfoSkeleton from '../components/MoreInfoSkeleton';
 
 type Props = {
 	movies: Movie[] | null;
+	genres: string[];
 };
 
-const Home: NextPage<Props> = ({ movies }) => {
+const Home: NextPage<Props> = ({ movies, genres }) => {
 	const { filtered, filterOnChange } = useMovieFilter(movies);
 	const { searchResults } = filtered;
 
@@ -66,11 +67,21 @@ const Home: NextPage<Props> = ({ movies }) => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
 	const movies = await getMovies();
+	const genres = new Set<string>();
 	// alphabetize movies by title
 	movies?.sort((a, b) => a.title.localeCompare(b.title));
+
+	// pull genres from movies
+	movies?.forEach(
+		(movie) =>
+			movie.genres.length &&
+			movie.genres.forEach((genre) => genres.add(genre))
+	);
+
 	return {
 		props: {
-			movies
+			movies,
+			genres: Array.from(genres)
 		},
 		revalidate: 86400
 	};
