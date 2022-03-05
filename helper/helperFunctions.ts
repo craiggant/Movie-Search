@@ -50,7 +50,7 @@ export const filterMovies = (
 	movieArray: Movie[]
 ) => {
 	const filteredByTitle = filterByTitle(movieArray, titleInput);
-
+	genreInput && console.log('GENRE INPUT');
 	// filter by both title and genre
 	if (titleInput && genreInput)
 		return filterByGenre(filteredByTitle, genreInput);

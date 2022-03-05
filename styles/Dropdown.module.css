@@ -1,0 +1,65 @@
+.container {
+	position: relative;
+	width: 25rem;
+	margin: 1rem 2rem 0 0;
+	overflow: visible;
+}
+
+.header {
+	width: 25rem;
+	height: 2.9rem;
+	padding: 10px;
+	font-size: 1.1rem;
+	outline: none;
+	background: linear-gradient(to left top, #000, #434343) fixed;
+	border-radius: 10px;
+	border: 2px solid rgba(255, 255, 255, 0.2);
+	color: rgba(255, 255, 255, 0.8);
+	transition: all 0.5s;
+	z-index: 20;
+}
+
+.dropdown {
+	position: absolute;
+	background: linear-gradient(to left top, #000, #434343) fixed;
+	color: rgba(255, 255, 255, 0.8);
+	width: 100%;
+	max-height: 15rem;
+	margin-top: 0.7rem;
+	padding: 0;
+	transition: all 0.4s;
+	border-radius: 10px;
+	overflow: hidden;
+	z-index: 20;
+	overflow-y: scroll;
+}
+
+.header:focus {
+	border: 2px solid rgba(255, 255, 255, 0.7);
+}
+
+.dropdown.focus {
+	border: 2px solid rgba(255, 255, 255, 0.7);
+}
+
+.listItem {
+	outline: 0;
+	list-style-type: none;
+	padding: 0.4rem 0 0 0;
+	width: 100%;
+	cursor: pointer;
+}
+
+.listItem:last-child {
+	margin-bottom: 0.5rem;
+}
+
+.listItem:hover,
+.listItem:focus {
+	background: #434343;
+}
+
+.liContent {
+	margin: 0 2.5rem;
+	font-size: 1.1rem;
+}
