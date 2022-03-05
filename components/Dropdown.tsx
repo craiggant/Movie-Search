@@ -1,5 +1,11 @@
-import React, { useState, SelectHTMLAttributes } from 'react';
+import React, {
+	useState,
+	useRef,
+	SelectHTMLAttributes,
+	useEffect
+} from 'react';
 import Item from './Item';
+import useClickOutside from '../hooks/useClickOutside';
 import styles from '../styles/Dropdown.module.css';
 
 interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
@@ -12,6 +18,13 @@ const Select: React.FC<Props> = ({ name, label, options, ...rest }) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [selectedVal, setSelectedVal] = useState<string>(label);
 	const [currentFocus, setCurrentFocus] = useState<number>(0);
+	const ref = useRef(null);
+
+	const handleClickOutside = (): void => {
+		if (isOpen) setIsOpen(false);
+	};
+
+	useClickOutside(ref, handleClickOutside);
 
 	const firstOption = 0;
 	const lastOption = options.length - 1;
@@ -63,7 +76,7 @@ const Select: React.FC<Props> = ({ name, label, options, ...rest }) => {
 	};
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} ref={ref}>
 			<button
 				role=""
 				aria-haspopup="true"
