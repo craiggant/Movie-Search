@@ -59,6 +59,10 @@
 .listItem:hover,
 .listItem:focus {
 	background: #434343;
+}
+
+.listItem:hover span,
+.listItem:focus span {
 	margin-left: 0.5rem;
 	transition: all 0.2s;
 }

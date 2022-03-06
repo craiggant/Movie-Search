@@ -33,7 +33,7 @@ const Item: React.FC<Props> = ({
 			onClick={handleLiClick}
 			{...rest}
 		>
-			{option}
+			<span>{option}</span>
 		</li>
 	);
 };
