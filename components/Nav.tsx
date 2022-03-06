@@ -2,10 +2,11 @@ import React from 'react';
 import Input from '../components/Input';
 import Dropdown from '../components/Dropdown';
 import styles from '../styles/Nav.module.css';
+import { NameAndValueInput } from '../types';
 
 type Props = {
 	filterOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	customFilter: (input: { name: string; value: string }) => void;
+	customFilter: (input: NameAndValueInput) => void;
 	options: string[];
 };
 

@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
+import { NameAndValueInput } from '../types';
 
 const useDropdownFocus = (
 	dropdownOptions: string[],
-	name: string,
-	customFilter: (input: { name: string; value: string }) => void
+	name?: string,
+	callbackFunction?: (input: NameAndValueInput) => void
 ) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [selectedVal, setSelectedVal] = useState<string>(dropdownOptions[0]);
 	const [currentFocus, setCurrentFocus] = useState<number>(0);
+
+	const toggleOpen = () => setIsOpen(!isOpen);
 
 	const firstOption = 0;
 	const lastOption = dropdownOptions.length - 1;
@@ -30,26 +33,28 @@ const useDropdownFocus = (
 			if (e.shiftKey)
 				return currentFocus !== firstOption
 					? setCurrentFocus(prevOption)
-					: setIsOpen(!isOpen);
+					: toggleOpen();
 			currentFocus !== lastOption
 				? setCurrentFocus(nextOption)
-				: setIsOpen(!isOpen);
+				: toggleOpen();
 		} else if (e.key === ' ') {
 			e.preventDefault();
 			if (isOpen) {
 				setCurrentFocus(initialFocus);
 			}
-			setIsOpen(!isOpen);
+			toggleOpen();
 		} else if (e.key === 'Enter') {
 			e.preventDefault();
 			if (isOpen) {
 				setSelectedVal(dropdownOptions[currentFocus]);
-				customFilter({
-					name,
-					value: dropdownOptions[currentFocus]
-				});
+				// filter visible results based on dropdown selection
+				if (callbackFunction && name)
+					callbackFunction({
+						name,
+						value: dropdownOptions[currentFocus]
+					});
 			}
-			setIsOpen(!isOpen);
+			toggleOpen();
 		} else if (e.key === 'Escape') {
 			e.preventDefault();
 			setIsOpen(false);
@@ -59,11 +64,9 @@ const useDropdownFocus = (
 	const handleClick = (option: string, index: number) => {
 		setCurrentFocus(index);
 		setSelectedVal(option);
-		customFilter({ name, value: option });
-		setIsOpen(!isOpen);
+		if (callbackFunction && name) callbackFunction({ name, value: option });
+		toggleOpen();
 	};
-
-	const toggleOpen = () => setIsOpen(!isOpen);
 
 	return {
 		currentFocus,

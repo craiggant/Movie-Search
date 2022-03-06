@@ -1,21 +1,17 @@
-import React, {
-	useCallback,
-	useEffect,
-	useRef,
-	SelectHTMLAttributes
-} from 'react';
+import React, { useRef, SelectHTMLAttributes } from 'react';
 import Item from './Item';
 import useClickOutside from '../hooks/useClickOutside';
 import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import styles from '../styles/Dropdown.module.css';
 import useDropdownFocus from '../hooks/useDropdownFocus';
+import { NameAndValueInput } from '../types';
+import styles from '../styles/Dropdown.module.css';
 
 interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
 	name: string;
 	label: string;
 	options: string[];
-	customFilter: (input: { name: string; value: string }) => void;
+	customFilter: (input: NameAndValueInput) => void;
 }
 
 const Select: React.FC<Props> = ({ name, label, options, customFilter }) => {

@@ -18,10 +18,7 @@ type Props = {
 };
 
 const Home: NextPage<Props> = ({ movies, genres }) => {
-	const { filtered, filterOnChange, customFilter } = useMovieFilter(
-		movies,
-		genres
-	);
+	const { filtered, filterOnChange, customFilter } = useMovieFilter(movies);
 	const { searchResults } = filtered;
 
 	const { isActive, setIsActive, currentMovie, handleMovieClick } =
@@ -75,8 +72,10 @@ const Home: NextPage<Props> = ({ movies, genres }) => {
 export const getStaticProps: GetStaticProps = async (context) => {
 	const movies = await getMovies();
 	const genres = new Set<string>();
-	// alphabetize movies by title
-	movies?.sort((a, b) => a.title.localeCompare(b.title));
+
+	const alphabetizedMovies = movies?.sort((a, b) =>
+		a.title.localeCompare(b.title)
+	);
 
 	// pull genres from movies
 	movies?.forEach(
@@ -88,12 +87,13 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	const alphabetizedGenres = Array.from(genres).sort((a, b) =>
 		a.localeCompare(b)
 	);
+
 	// add an 'all genres' category, since it couldn't have been pulled from API
 	alphabetizedGenres.unshift('All genres');
 
 	return {
 		props: {
-			movies,
+			movies: alphabetizedMovies,
 			genres: alphabetizedGenres
 		},
 		revalidate: 86400

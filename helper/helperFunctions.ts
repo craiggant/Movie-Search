@@ -19,28 +19,14 @@ const filterByTitle = (movieArray: Movie[], input: string): Movie[] => {
  */
 
 const filterByGenre = (movieArray: Movie[], input: string): Movie[] => {
-	// split input by comma or space, so that a user could look up multiple genres at once
-	// const arrayFromInputString = input.split(/[ ,]+/);
-
-	// return movieArray.filter((movie) => {
-	// 	if (movie.genres.length) {
-	// 		const resultArray = arrayFromInputString.map((input) => {
-	// 			return movie.genres.find((genre) =>
-	// 				genre.toLowerCase().includes(input.toLowerCase())
-	// 			);
-	// 		});
-	// 		if (!resultArray.includes(undefined)) {
-	// 			return movie;
-	// 		}
-	// 	}
-	// });
+	if (input === '') return movieArray;
 	return movieArray.filter((movie) => movie.genres.includes(input));
 };
 
 /**
  * Filters movie array by title, genre, or both.
- * @param {string} nameSearch
- * @param {string} tagSearch
+ * @param {string} titleInput
+ * @param {string} genreInput
  * @param {Movie[]} movieArray
  * @returns {Movie[]} arrayOfMatches
  */
@@ -51,13 +37,14 @@ export const filterMovies = (
 	movieArray: Movie[]
 ) => {
 	const filteredByTitle = filterByTitle(movieArray, titleInput);
-	if (genreInput === 'All genres') genreInput = '';
+
+	const gInput = genreInput === 'All genres' ? '' : genreInput;
+
 	// filter by both title and genre
-	if (titleInput && genreInput)
-		return filterByGenre(filteredByTitle, genreInput);
+	if (titleInput && genreInput) return filterByGenre(filteredByTitle, gInput);
 
 	// filter by genre only
-	if (genreInput) return filterByGenre(movieArray, genreInput);
+	if (gInput) return filterByGenre(movieArray, gInput);
 
 	// // filter by title only
 	return filteredByTitle;

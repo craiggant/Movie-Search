@@ -22,7 +22,12 @@ export type FullMovieInfo = {
 };
 
 export type MovieFilter = {
-	titleSearch: '';
-	genreSearch: '';
+	titleSearch: string;
+	genreSearch: string;
 	searchResults: Movie[] | null;
+};
+
+export type NameAndValueInput = {
+	name: string;
+	value: string;
 };
