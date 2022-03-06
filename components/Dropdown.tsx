@@ -32,6 +32,7 @@ const Select: React.FC<Props> = ({ name, label, options }) => {
 			<button
 				role="button"
 				aria-haspopup="true"
+				aria-label={label}
 				aria-expanded={isOpen}
 				className={styles.header}
 				onClick={toggleOpen}
@@ -41,10 +42,10 @@ const Select: React.FC<Props> = ({ name, label, options }) => {
 				<span aria-hidden="true">&#x25be;</span>
 			</button>
 			{isOpen && (
-				<ul className={styles.dropdown}>
+				<ul className={styles.dropdown} role="menu">
 					{options.map((option, index) => (
 						<Item
-							role="option"
+							role="menuitem"
 							key={index}
 							index={index}
 							className={styles.listItem}
