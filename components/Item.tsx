@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback, LiHTMLAttributes } from 'react';
+import React, { useEffect, useRef, LiHTMLAttributes } from 'react';
 import styles from '../styles/Dropdown.module.css';
 
 interface Props extends LiHTMLAttributes<HTMLLIElement> {
