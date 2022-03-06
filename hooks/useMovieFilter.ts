@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { filterMovies } from '../helper/helperFunctions';
-import { Movie, MovieFilter } from '../types';
+import { Movie, MovieFilter, NameAndValueInput } from '../types';
 
 const useMovieFilter = (movies: Movie[] | null) => {
 	const initialState: MovieFilter = {
@@ -13,7 +13,10 @@ const useMovieFilter = (movies: Movie[] | null) => {
 
 	const filterOnChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		const { name, value } = e.target;
+		customFilter({ name, value });
+	};
 
+	const customFilter = ({ name, value }: NameAndValueInput): void => {
 		const titleInput =
 			name === 'titleSearch' ? value : filtered.titleSearch;
 		const genreInput =
@@ -31,6 +34,7 @@ const useMovieFilter = (movies: Movie[] | null) => {
 
 	return {
 		filtered,
+		customFilter,
 		filterOnChange
 	};
 };

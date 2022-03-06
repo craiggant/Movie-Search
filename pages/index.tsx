@@ -14,10 +14,11 @@ import MoreInfoSkeleton from '../components/MoreInfoSkeleton';
 
 type Props = {
 	movies: Movie[] | null;
+	genres: string[];
 };
 
-const Home: NextPage<Props> = ({ movies }) => {
-	const { filtered, filterOnChange } = useMovieFilter(movies);
+const Home: NextPage<Props> = ({ movies, genres }) => {
+	const { filtered, filterOnChange, customFilter } = useMovieFilter(movies);
 	const { searchResults } = filtered;
 
 	const { isActive, setIsActive, currentMovie, handleMovieClick } =
@@ -32,7 +33,11 @@ const Home: NextPage<Props> = ({ movies }) => {
 					content="Find favorite movies by title or genre"
 				/>
 			</Head>
-			<Nav filterOnChange={filterOnChange}></Nav>
+			<Nav
+				filterOnChange={filterOnChange}
+				customFilter={customFilter}
+				options={genres}
+			></Nav>
 			<div className={styles.container}>
 				<main className={styles.main}>
 					<div className={styles.grid}>
@@ -66,11 +71,30 @@ const Home: NextPage<Props> = ({ movies }) => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
 	const movies = await getMovies();
-	// alphabetize movies by title
-	movies?.sort((a, b) => a.title.localeCompare(b.title));
+	const genres = new Set<string>();
+
+	const alphabetizedMovies = movies?.sort((a, b) =>
+		a.title.localeCompare(b.title)
+	);
+
+	// pull genres from movies
+	movies?.forEach(
+		(movie) =>
+			movie.genres.length &&
+			movie.genres.forEach((genre) => genres.add(genre))
+	);
+
+	const alphabetizedGenres = Array.from(genres).sort((a, b) =>
+		a.localeCompare(b)
+	);
+
+	// add an 'all genres' category, since it couldn't have been pulled from API
+	alphabetizedGenres.unshift('All genres');
+
 	return {
 		props: {
-			movies
+			movies: alphabetizedMovies,
+			genres: alphabetizedGenres
 		},
 		revalidate: 86400
 	};
