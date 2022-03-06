@@ -1,6 +1,8 @@
 import React, { useRef, SelectHTMLAttributes } from 'react';
 import Item from './Item';
 import useClickOutside from '../hooks/useClickOutside';
+import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from '../styles/Dropdown.module.css';
 import useDropdownFocus from '../hooks/useDropdownFocus';
 
@@ -19,7 +21,7 @@ const Select: React.FC<Props> = ({ name, label, options }) => {
 		handleKeyDown,
 		toggleOpen,
 		handleClick
-	} = useDropdownFocus(options, label);
+	} = useDropdownFocus(options);
 
 	const handleClickOutside = (): void => {
 		if (isOpen) toggleOpen();
@@ -38,8 +40,13 @@ const Select: React.FC<Props> = ({ name, label, options }) => {
 				onClick={toggleOpen}
 				onKeyDown={handleKeyDown}
 			>
-				{selectedVal || label}
-				<span aria-hidden="true">&#x25be;</span>
+				<label className={styles.label}>{label}</label>
+				<span>{selectedVal}</span>
+				<span aria-hidden="true">
+					<FontAwesomeIcon
+						icon={isOpen ? faChevronUp : faChevronDown}
+					/>
+				</span>
 			</button>
 			{isOpen && (
 				<ul className={styles.dropdown} role="menu">

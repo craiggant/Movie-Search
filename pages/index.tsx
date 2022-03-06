@@ -78,10 +78,16 @@ export const getStaticProps: GetStaticProps = async (context) => {
 			movie.genres.forEach((genre) => genres.add(genre))
 	);
 
+	const alphabetizedGenres = Array.from(genres).sort((a, b) =>
+		a.localeCompare(b)
+	);
+	// add an 'all genres' category, since it couldn't have been pulled from API
+	alphabetizedGenres.unshift('All genres');
+
 	return {
 		props: {
 			movies,
-			genres: Array.from(genres)
+			genres: alphabetizedGenres
 		},
 		revalidate: 86400
 	};

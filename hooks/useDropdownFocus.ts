@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-const useDropdownFocus = (dropdownOptions: string[], initialVal: string) => {
+const useDropdownFocus = (dropdownOptions: string[]) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
-	const [selectedVal, setSelectedVal] = useState<string>(initialVal);
+	const [selectedVal, setSelectedVal] = useState<string>(dropdownOptions[0]);
 	const [currentFocus, setCurrentFocus] = useState<number>(0);
 
 	const firstOption = 0;

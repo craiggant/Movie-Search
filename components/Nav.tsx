@@ -17,6 +17,7 @@ const Nav = ({ options, filterOnChange }: Props) => {
 				type="text"
 				label="Search By Title"
 				name="titleSearch"
+				placeholder="Type to search..."
 				onChange={filterOnChange}
 			/>
 			<Dropdown

@@ -5,10 +5,10 @@
 }
 
 .label {
+	position: absolute;
 	color: #fff;
-	opacity: 0;
-	margin: -2rem 0 0 1rem;
-	transition: all 0.5s;
+	opacity: 0.7;
+	margin: -1.3rem 0 -0.5rem 0.4rem;
 	font-size: 1.1rem;
 }
 
@@ -23,7 +23,6 @@
 	border: 2px solid rgba(255, 255, 255, 0.2);
 	color: rgba(255, 255, 255, 0.8);
 	transition: all 0.5s;
-	z-index: 20;
 }
 
 .input:hover,
@@ -36,19 +35,12 @@
 	border: none;
 }
 
-.input:hover ~ .label,
-.input:focus ~ .label {
-	cursor: text;
-}
-
-.input:not(:placeholder-shown) ~ .label {
-	opacity: 0.7;
-	margin: -4.1rem 0 0 0.2rem;
-}
-
 @media (max-width: 880px) {
 	.inputGroup {
 		margin: 1rem 0 0 0;
+	}
+	.label {
+		margin: -1.3rem 0 -0.5rem 1.4rem;
 	}
 }
 

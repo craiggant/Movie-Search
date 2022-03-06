@@ -9,6 +9,9 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 const Input: React.FC<Props> = ({ name, label, ...rest }) => {
 	return (
 		<div className={styles.inputGroup}>
+			<label htmlFor={name} className={styles.label}>
+				{label}
+			</label>
 			<input
 				className={styles.input}
 				id={name}
@@ -16,9 +19,6 @@ const Input: React.FC<Props> = ({ name, label, ...rest }) => {
 				placeholder={label}
 				{...rest}
 			/>
-			<label htmlFor={name} className={styles.label}>
-				{label}
-			</label>
 		</div>
 	);
 };
