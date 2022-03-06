@@ -11,9 +11,19 @@ const useMovieFilter = (movies: Movie[] | null) => {
 
 	const [filtered, setFiltered] = useState<MovieFilter>(initialState);
 
+	type MyInput = {
+		name: string;
+		value: string;
+	};
+
 	const filterOnChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		const { name, value } = e.target;
+		customFilter({ name, value });
+	};
 
+	const customFilter = (input: MyInput): void => {
+		const { name, value } = input;
+		console.log(name, value);
 		const titleInput =
 			name === 'titleSearch' ? value : filtered.titleSearch;
 		const genreInput =
@@ -31,6 +41,7 @@ const useMovieFilter = (movies: Movie[] | null) => {
 
 	return {
 		filtered,
+		customFilter,
 		filterOnChange
 	};
 };

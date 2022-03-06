@@ -4,13 +4,12 @@ import Dropdown from '../components/Dropdown';
 import styles from '../styles/Nav.module.css';
 
 type Props = {
-	filterOnChange: (
-		e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-	) => void;
+	filterOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	customFilter: (input: { name: string; value: string }) => void;
 	options: string[];
 };
 
-const Nav = ({ options, filterOnChange }: Props) => {
+const Nav = ({ options, filterOnChange, customFilter }: Props) => {
 	return (
 		<div className={styles.nav}>
 			<Input
@@ -24,7 +23,7 @@ const Nav = ({ options, filterOnChange }: Props) => {
 				label="Filter By Genre"
 				name="genreSearch"
 				options={options}
-				onChange={filterOnChange}
+				customFilter={customFilter}
 			/>
 		</div>
 	);

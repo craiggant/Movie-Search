@@ -1,4 +1,9 @@
-import React, { useRef, SelectHTMLAttributes } from 'react';
+import React, {
+	useCallback,
+	useEffect,
+	useRef,
+	SelectHTMLAttributes
+} from 'react';
 import Item from './Item';
 import useClickOutside from '../hooks/useClickOutside';
 import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
@@ -10,9 +15,10 @@ interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
 	name: string;
 	label: string;
 	options: string[];
+	customFilter: (input: { name: string; value: string }) => void;
 }
 
-const Select: React.FC<Props> = ({ name, label, options }) => {
+const Select: React.FC<Props> = ({ name, label, options, customFilter }) => {
 	const ref = useRef(null);
 	const {
 		currentFocus,
@@ -21,7 +27,7 @@ const Select: React.FC<Props> = ({ name, label, options }) => {
 		handleKeyDown,
 		toggleOpen,
 		handleClick
-	} = useDropdownFocus(options);
+	} = useDropdownFocus(options, name, customFilter);
 
 	const handleClickOutside = (): void => {
 		if (isOpen) toggleOpen();

@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 
-const useDropdownFocus = (dropdownOptions: string[]) => {
+const useDropdownFocus = (
+	dropdownOptions: string[],
+	name: string,
+	customFilter: (input: { name: string; value: string }) => void
+) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [selectedVal, setSelectedVal] = useState<string>(dropdownOptions[0]);
 	const [currentFocus, setCurrentFocus] = useState<number>(0);
@@ -40,6 +44,10 @@ const useDropdownFocus = (dropdownOptions: string[]) => {
 			e.preventDefault();
 			if (isOpen) {
 				setSelectedVal(dropdownOptions[currentFocus]);
+				customFilter({
+					name,
+					value: dropdownOptions[currentFocus]
+				});
 			}
 			setIsOpen(!isOpen);
 		} else if (e.key === 'Escape') {
@@ -51,6 +59,7 @@ const useDropdownFocus = (dropdownOptions: string[]) => {
 	const handleClick = (option: string, index: number) => {
 		setCurrentFocus(index);
 		setSelectedVal(option);
+		customFilter({ name, value: option });
 		setIsOpen(!isOpen);
 	};
 

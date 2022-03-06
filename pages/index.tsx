@@ -18,7 +18,10 @@ type Props = {
 };
 
 const Home: NextPage<Props> = ({ movies, genres }) => {
-	const { filtered, filterOnChange } = useMovieFilter(movies, genres);
+	const { filtered, filterOnChange, customFilter } = useMovieFilter(
+		movies,
+		genres
+	);
 	const { searchResults } = filtered;
 
 	const { isActive, setIsActive, currentMovie, handleMovieClick } =
@@ -33,7 +36,11 @@ const Home: NextPage<Props> = ({ movies, genres }) => {
 					content="Find favorite movies by title or genre"
 				/>
 			</Head>
-			<Nav filterOnChange={filterOnChange} options={genres}></Nav>
+			<Nav
+				filterOnChange={filterOnChange}
+				customFilter={customFilter}
+				options={genres}
+			></Nav>
 			<div className={styles.container}>
 				<main className={styles.main}>
 					<div className={styles.grid}>
