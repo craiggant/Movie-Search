@@ -23,13 +23,14 @@ const Item: React.FC<Props> = ({
 		}
 	}, [focus]);
 
+	const handleLiClick = () => handleClick(option, index);
+
 	return (
 		<li
+			ref={ref}
 			className={styles.listItem}
 			tabIndex={focus ? 0 : -1}
-			role="button"
-			ref={ref}
-			onClick={() => handleClick(option, index)}
+			onClick={handleLiClick}
 			{...rest}
 		>
 			{option}
