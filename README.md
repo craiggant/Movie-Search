@@ -3,7 +3,7 @@
 ---
 
 This application allows a user to access movie information and to filter movies by title or genre (or both at the same time).
-See the deployed site at [gant.tech](https://www.gant.tech).
+
 
 <br />
 <br />
@@ -22,4 +22,3 @@ This application also:
 -   is deployed with Vercel
 -   uses Framer Motion to enable the modal animations and swipe action
 
-See the deployed site at [gant.tech](https://www.gant.tech).
