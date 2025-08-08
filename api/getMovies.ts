@@ -7,17 +7,17 @@ const getApiBaseUrl = () => {
 	if (process.env.NEXT_PUBLIC_API_BASE_URL) {
 		return process.env.NEXT_PUBLIC_API_BASE_URL;
 	}
-	
+
 	// For client-side requests, use the current origin
 	if (typeof window !== 'undefined') {
 		return window.location.origin;
 	}
-	
+
 	// For server-side requests in production (Vercel automatically sets this)
 	if (process.env.VERCEL_URL) {
 		return `https://${process.env.VERCEL_URL}`;
 	}
-	
+
 	// Fallback for local development
 	return 'http://localhost:3000';
 };
