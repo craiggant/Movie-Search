@@ -10,11 +10,15 @@ export default async function handler(
 	}
 
 	const { id } = req.query;
-
+	console.log(id);
 	if (!id || typeof id !== 'string') {
 		return res.status(400).json({ message: 'Movie ID is required' });
 	}
-
+	console.log(`Fetching movie with ID: ${id}`);
+	console.log(
+		'movie url',
+		`${process.env.MOVIE_API_URL}/movie/${id}?language=en-US`
+	);
 	try {
 		const response = await axios({
 			method: 'GET',
