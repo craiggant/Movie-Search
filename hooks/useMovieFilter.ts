@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { filterMovies } from '../helper/helperFunctions';
-import { Movie, MovieFilter, NameAndValueInput } from '../types';
+import { MovieFilter, MovieWithGenreNames, NameAndValueInput } from '../types';
 
-const useMovieFilter = (movies: Movie[] | null) => {
+const useMovieFilter = (movies: MovieWithGenreNames[] | null) => {
 	const initialState: MovieFilter = {
 		titleSearch: '',
 		genreSearch: '',
