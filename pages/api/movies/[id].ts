@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
 
+// API route to fetch individual movie details by ID
 export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse
