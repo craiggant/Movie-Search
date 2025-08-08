@@ -8,7 +8,7 @@ export default async function handler(
 	if (req.method !== 'GET') {
 		return res.status(405).json({ message: 'Method not allowed' });
 	}
-	console.log('hi');
+
 	try {
 		const response = await axios({
 			method: 'GET',
