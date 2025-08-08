@@ -9,12 +9,13 @@ type Props = {
 };
 
 const Card = ({ movie, handleClick }: Props) => {
-	const { id, title } = movie;
+	const { id, title, adult } = movie;
+	if (adult) return null;
 	return (
 		<div className={styles.card} data-id={id} onClick={handleClick}>
 			<div className={styles.cardBody}>
 				<ImageWithDefault
-					src={`/moviePosterImages/${id}.jpeg`}
+					src={`${process.env.NEXT_PUBLIC_IMAGE_API_URL}${movie.poster_path}`}
 					fallback={`/moviePosterImages/defaultImage.jpeg`}
 					alt={title}
 					layout="fill"

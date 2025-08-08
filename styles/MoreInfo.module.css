@@ -7,6 +7,9 @@
 	z-index: 1;
 	box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.5);
 	transition: all 0.5s ease;
+	background-position: left;
+	background-size: cover;
+	background-repeat: no-repeat;
 }
 
 .cardOverlay {
@@ -48,8 +51,9 @@
 
 .movieSubtitle {
 	padding: 0 0.3125rem;
-	display: grid;
-	grid-template-columns: 1fr 4fr;
+	display: flex;
+	flex-direction: row;
+	gap: 1rem;
 }
 
 .movieGenres {
@@ -70,6 +74,10 @@
 .movieDescription {
 	text-align: justify;
 	padding-top: 0.3125rem;
+}
+
+.movieCredits > a:hover {
+	text-decoration: underline;
 }
 
 @media screen and (max-width: 768px) {

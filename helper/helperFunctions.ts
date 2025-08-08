@@ -1,24 +1,30 @@
-import { Movie } from '../types';
+import { Movie, MovieWithGenreNames } from '../types';
 
 /**
  * @param {string} input
- * @param {Movie[]} movieArray
- * @returns {Movie[]} arrayOfMatches
+ * @param {MovieWithGenreNames[]} movieArray
+ * @returns {MovieWithGenreNames[]} arrayOfMatches
  */
 
-const filterByTitle = (movieArray: Movie[], input: string): Movie[] => {
+const filterByTitle = (
+	movieArray: MovieWithGenreNames[],
+	input: string
+): MovieWithGenreNames[] => {
 	return movieArray.filter((movie) => {
 		return movie.title.toLowerCase().includes(input?.toLowerCase());
 	});
 };
 
 /**
- * @param {Movie[]} movieArray
+ * @param {MovieWithGenreNames[]} movieArray
  * @param {string} input
- * @returns {Movie[]} arrayOfMatches
+ * @returns {MovieWithGenreNames[]} arrayOfMatches
  */
 
-const filterByGenre = (movieArray: Movie[], input: string): Movie[] => {
+const filterByGenre = (
+	movieArray: MovieWithGenreNames[],
+	input: string
+): MovieWithGenreNames[] => {
 	if (input === '') return movieArray;
 	return movieArray.filter((movie) => movie.genres.includes(input));
 };
@@ -27,18 +33,18 @@ const filterByGenre = (movieArray: Movie[], input: string): Movie[] => {
  * Filters movie array by title, genre, or both.
  * @param {string} titleInput
  * @param {string} genreInput
- * @param {Movie[]} movieArray
- * @returns {Movie[]} arrayOfMatches
+ * @param {MovieWithGenreNames[]} movieArray
+ * @returns {MovieWithGenreNames[]} arrayOfMatches
  */
 
 export const filterMovies = (
 	titleInput: string,
 	genreInput: string,
-	movieArray: Movie[]
+	movieArray: MovieWithGenreNames[]
 ) => {
 	const filteredByTitle = filterByTitle(movieArray, titleInput);
 
-	const gInput = genreInput === 'All genres' ? '' : genreInput;
+	const gInput = genreInput === 'All Genres' ? '' : genreInput;
 
 	// filter by both title and genre
 	if (titleInput && genreInput) return filterByGenre(filteredByTitle, gInput);
