@@ -1,8 +1,9 @@
 import axios, { AxiosResponse } from 'axios';
 import { FullMovieInfo, Genre, Movie, MovieResults } from '../types';
 
-const API_BASE_URL =
-	process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000';
+const API_BASE_URL = `https://${
+	process.env.NEXT_PUBLIC_VERCEL_URL || 'localhost:3000'
+}`;
 
 export const getMovies = async (): Promise<Movie[]> => {
 	try {
