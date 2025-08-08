@@ -1,17 +1,34 @@
 import React, { useState } from 'react';
 import { getMovieById } from '../api/getMovies';
-import { FullMovieInfo } from '../types';
+import { FullMovieInfo, Genre } from '../types';
 
 const initialFullMovieState: FullMovieInfo = {
-	description: '',
-	duration: 0,
+	adult: false,
+	backdrop_path: '',
+	belongs_to_collection: null,
+	budget: 0,
 	genres: [],
-	id: '',
-	moods: [],
-	releaseDate: '',
-	releaseYear: 0,
+	homepage: '',
+	id: 0,
+	imdb_id: null,
+	origin_country: [],
+	original_language: '',
+	original_title: '',
+	overview: '',
+	popularity: 0,
+	poster_path: '',
+	production_companies: [],
+	production_countries: [],
+	release_date: '',
+	revenue: 0,
+	runtime: 0,
+	spoken_languages: [],
+	status: '',
+	tagline: '',
 	title: '',
-	topCast: []
+	video: false,
+	vote_average: 0,
+	vote_count: 0
 };
 
 const useCurrentMovie = () => {

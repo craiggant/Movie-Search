@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Input from '../components/Input';
 import Dropdown from '../components/Dropdown';
 import styles from '../styles/Nav.module.css';
-import { NameAndValueInput } from '../types';
+import { Genre, NameAndValueInput } from '../types';
 
 type Props = {
 	filterOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	customFilter: (input: NameAndValueInput) => void;
-	options: string[];
+	options: Genre[];
 };
 
 const Nav = ({ options, filterOnChange, customFilter }: Props) => {
+	const flattenedGenres = useMemo(
+		() => options.map(({ name }) => name),
+		[options]
+	);
 	return (
 		<div className={styles.nav}>
 			<Input
@@ -23,7 +27,7 @@ const Nav = ({ options, filterOnChange, customFilter }: Props) => {
 			<Dropdown
 				label="Filter By Genre"
 				name="genreSearch"
-				options={options}
+				options={flattenedGenres}
 				customFilter={customFilter}
 			/>
 		</div>

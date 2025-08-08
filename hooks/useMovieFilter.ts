@@ -8,6 +8,7 @@ const useMovieFilter = (movies: Movie[] | null) => {
 		genreSearch: '',
 		searchResults: movies
 	};
+	console.log(movies);
 
 	const [filtered, setFiltered] = useState<MovieFilter>(initialState);
 
@@ -19,6 +20,7 @@ const useMovieFilter = (movies: Movie[] | null) => {
 	const customFilter = ({ name, value }: NameAndValueInput): void => {
 		const titleInput =
 			name === 'titleSearch' ? value : filtered.titleSearch;
+
 		const genreInput =
 			name === 'genreSearch' ? value : filtered.genreSearch;
 

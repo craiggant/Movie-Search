@@ -5,16 +5,16 @@ import Card from '../components/Card';
 import Modal from '../components/Modal';
 import MoreInfo from '../components/MoreInfo';
 import Nav from '../components/Nav';
-import { getMovies } from '../api/getMovies';
-import { Movie } from '../types';
+import { getGenres, getMovies } from '../api/getMovies';
+import { Genre, Movie, MovieWithGenreNames } from '../types';
 import styles from '../styles/Home.module.css';
 import useCurrentMovie from '../hooks/useCurrentMovie';
 import useMovieFilter from '../hooks/useMovieFilter';
 import MoreInfoSkeleton from '../components/MoreInfoSkeleton';
 
 type Props = {
-	movies: Movie[] | null;
-	genres: string[];
+	movies: MovieWithGenreNames[];
+	genres: Genre[];
 };
 
 const Home: NextPage<Props> = ({ movies, genres }) => {
@@ -71,32 +71,34 @@ const Home: NextPage<Props> = ({ movies, genres }) => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
 	const movies = await getMovies();
-	const genres = new Set<string>();
+	const genres = await getGenres();
+	const genreMap = new Map<number, string>();
+	// iterate through genres and make a hash with id and name
+	genres.forEach((genre) => genreMap.set(genre.id, genre.name));
 
-	const alphabetizedMovies = movies?.sort((a, b) =>
-		a.title.localeCompare(b.title)
-	);
+	// Clean movies data to ensure no undefined values
+	const cleanedMovies =
+		movies.map((movie) => ({
+			...movie,
+			genres: movie.genre_ids.map((id) => genreMap.get(id) || '')
+		})) || null;
 
-	// pull genres from movies
-	movies?.forEach(
-		(movie) =>
-			movie.genres.length &&
-			movie.genres.forEach((genre) => genres.add(genre))
-	);
+	const alphabetizedMovies =
+		cleanedMovies?.sort((a, b) => a.title.localeCompare(b.title)) || null;
 
 	const alphabetizedGenres = Array.from(genres).sort((a, b) =>
-		a.localeCompare(b)
+		a.name.localeCompare(b.name)
 	);
 
 	// add an 'all genres' category, since it couldn't have been pulled from API
-	alphabetizedGenres.unshift('All genres');
+	alphabetizedGenres.unshift({ id: 999999999999999, name: 'All Genres' });
 
 	return {
 		props: {
 			movies: alphabetizedMovies,
 			genres: alphabetizedGenres
 		},
-		revalidate: 86400
+		revalidate: 259200 // regenerate the page every 72 hours
 	};
 };
 

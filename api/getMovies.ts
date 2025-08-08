@@ -1,37 +1,43 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { FullMovieInfo, Movie } from '../types';
+import axios, { AxiosResponse } from 'axios';
+import { FullMovieInfo, Genre, Movie, MovieResults } from '../types';
 
-const config: AxiosRequestConfig = {
-	method: 'get',
-	url: process.env.MOVIE_API_URL,
-	headers: { Authorization: `${process.env.API_AUTH_HEADER}` },
-	validateStatus: function (status) {
-		return status < 500; // Resolve only if the status code is less than 500
+const API_BASE_URL =
+	process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000';
+
+export const getMovies = async (): Promise<Movie[]> => {
+	try {
+		const { data: movies }: AxiosResponse<MovieResults> = await axios.get(
+			`${API_BASE_URL}/api/movies/trending`
+		);
+		return movies.results || [];
+	} catch (error) {
+		console.log(error);
+		return [];
 	}
 };
 
-export const getMovies = async (): Promise<Movie[] | null> => {
+export const getGenres = async (): Promise<Genre[]> => {
 	try {
-		const { data }: AxiosResponse = await axios(config);
-		return data.data;
+		const { data }: AxiosResponse = await axios.get(
+			`${API_BASE_URL}/api/genres`
+		);
+		return data.genres || [];
 	} catch (error) {
 		console.log(error);
-		return null;
+		return [];
 	}
 };
 
 export const getMovieById = async (
 	id: string | undefined
 ): Promise<FullMovieInfo | null> => {
+	if (!id) return null;
+
 	try {
-		const { data }: AxiosResponse = await axios({
-			method: 'get',
-			url: `${process.env.NEXT_PUBLIC_MOVIE_API_URL}/${id}`,
-			headers: {
-				Authorization: `${process.env.NEXT_PUBLIC_MOVIE_API_AUTH_HEADER}`
-			}
-		});
-		return data.data;
+		const { data }: AxiosResponse<FullMovieInfo> = await axios.get(
+			`${API_BASE_URL}/api/movies/${id}`
+		);
+		return data;
 	} catch (error) {
 		console.log(error);
 		return null;
