@@ -15,7 +15,7 @@ export default async function handler(
 	if (!id || typeof id !== 'string') {
 		return res.status(400).json({ message: 'Movie ID is required' });
 	}
-\
+
 	try {
 		const response = await axios({
 			method: 'GET',
