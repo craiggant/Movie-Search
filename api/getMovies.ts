@@ -7,25 +7,24 @@ const getApiBaseUrl = () => {
 	if (process.env.NEXT_PUBLIC_API_BASE_URL) {
 		return process.env.NEXT_PUBLIC_API_BASE_URL;
 	}
-
+	
 	// For client-side requests, use the current origin
 	if (typeof window !== 'undefined') {
 		return window.location.origin;
 	}
-
-	// For server-side requests in production
+	
+	// For server-side requests in production (Vercel automatically sets this)
 	if (process.env.VERCEL_URL) {
 		return `https://${process.env.VERCEL_URL}`;
 	}
-
+	
 	// Fallback for local development
 	return 'http://localhost:3000';
 };
 
-const API_BASE_URL = getApiBaseUrl();
-
 export const getMovies = async (): Promise<Movie[]> => {
 	try {
+		const API_BASE_URL = getApiBaseUrl();
 		const { data: movies }: AxiosResponse<MovieResults> = await axios.get(
 			`${API_BASE_URL}/api/movies/trending`
 		);
@@ -38,6 +37,7 @@ export const getMovies = async (): Promise<Movie[]> => {
 
 export const getGenres = async (): Promise<Genre[]> => {
 	try {
+		const API_BASE_URL = getApiBaseUrl();
 		const { data }: AxiosResponse = await axios.get(
 			`${API_BASE_URL}/api/genres`
 		);
@@ -54,6 +54,7 @@ export const getMovieById = async (
 	if (!id) return null;
 
 	try {
+		const API_BASE_URL = getApiBaseUrl();
 		const { data }: AxiosResponse<FullMovieInfo> = await axios.get(
 			`${API_BASE_URL}/api/movies/${id}`
 		);
