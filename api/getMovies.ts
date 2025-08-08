@@ -55,6 +55,7 @@ export const getMovieById = async (
 
 	try {
 		const API_BASE_URL = getApiBaseUrl();
+		console.log(API_BASE_URL);
 		const { data }: AxiosResponse<FullMovieInfo> = await axios.get(
 			`${API_BASE_URL}/api/movies/${id}`
 		);
