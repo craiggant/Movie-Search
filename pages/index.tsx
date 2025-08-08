@@ -5,7 +5,7 @@ import Card from '../components/Card';
 import Modal from '../components/Modal';
 import MoreInfo from '../components/MoreInfo';
 import Nav from '../components/Nav';
-import { getGenres, getMovies } from '../api/getMovies';
+import { getGenres, getMovies } from '../helper/getMovies';
 import { Genre, Movie, MovieWithGenreNames } from '../types';
 import styles from '../styles/Home.module.css';
 import useCurrentMovie from '../hooks/useCurrentMovie';

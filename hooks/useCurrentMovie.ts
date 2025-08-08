@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getMovieById } from '../api/getMovies';
+import { getMovieById } from '../helper/getMovies';
 import { FullMovieInfo, Genre } from '../types';
 
 const initialFullMovieState: FullMovieInfo = {
